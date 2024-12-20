@@ -2,5 +2,3 @@ qdrant_client
 transformers
 torch
 pillow
-io
-base64
