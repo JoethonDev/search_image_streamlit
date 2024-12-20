@@ -78,7 +78,7 @@ if uploaded_image:
 
     for idx, record in enumerate(records):
         column_idx = idx % 3
-        image_bytes = get_bytes_from_base64(record.payload['base64'])
+        image_bytes = get_bytes_from_base64(record.payload['image_base64'])
         with column[column_idx]:
             st.image(
                 image=image_bytes
@@ -87,5 +87,5 @@ if uploaded_image:
                 label="Find Similar",
                 key=record.id,
                 on_click=find_similar,
-                args=[record.payload['base64']]
+                args=[record.payload['image_base64']]
             )    
