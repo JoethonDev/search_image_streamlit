@@ -14,7 +14,8 @@ model.eval()
 collection_name = "fashion"
 
 
-# if "image_bytes" not in st.session_state:
+if "image_bytes" not in st.session_state:
+    st.session_state.image_bytes = None
 
 def embedded_image(image_bytes):
     image = Image.open(BytesIO(image_bytes)).convert("RGB")
