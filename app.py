@@ -14,8 +14,7 @@ model.eval()
 collection_name = "fashion"
 
 
-if "image_bytes" not in st.session_state:
-    st.session_state.image_bytes = None
+# if "image_bytes" not in st.session_state:
 
 def embedded_image(image_bytes):
     image = Image.open(BytesIO(image_bytes)).convert("RGB")
@@ -51,7 +50,7 @@ def find_similar(image_bytes):
 
 
 def get_bytes_from_base64(base64_string):
-    return BytesIO(base64.b64decode(base64_string))
+    return base64.b64decode(base64_string)
 
 # File Uploaders
 uploaded_image = st.file_uploader("Upload Image", type=["png", "jpg", "jpeg"]) 
@@ -59,6 +58,7 @@ uploaded_image = st.file_uploader("Upload Image", type=["png", "jpg", "jpeg"])
 # Results' Header
 if uploaded_image:
     st.session_state.image_bytes = uploaded_image.getvalue()
+    uploaded_image.detach()
     uploaded_image.close()
 
 # Check Value in session_state
@@ -91,3 +91,5 @@ if st.session_state.image_bytes:
                 on_click=find_similar,
                 args=[record.payload['image_base64']]
             )    
+    st.session_state.image_bytes = None
+    
