@@ -58,8 +58,8 @@ uploaded_image = st.file_uploader("Upload Image", type=["png", "jpg", "jpeg"])
 
 # Results' Header
 if uploaded_image:
-    uploaded_image.close()
     st.session_state.image_bytes = uploaded_image.getvalue()
+    uploaded_image.close()
 
 # Check Value in session_state
 if st.session_state.image_bytes:
