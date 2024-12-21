@@ -49,18 +49,20 @@ def find_similar(image_bytes):
     st.session_state.image_bytes = get_bytes_from_base64(image_bytes)
 
 
+
 def get_bytes_from_base64(base64_string):
-    return base64.b64decode(base64_string)
+    return BytesIO(base64.b64decode(base64_string))
 
 # File Uploaders
 uploaded_image = st.file_uploader("Upload Image", type=["png", "jpg", "jpeg"]) 
 
 # Results' Header
 if uploaded_image:
-    # Check Value in session_state
-    if not st.session_state.image_bytes:
-        st.session_state.image_bytes = uploaded_image.getvalue()
+    uploaded_image.close()
+    st.session_state.image_bytes = uploaded_image.getvalue()
 
+# Check Value in session_state
+if st.session_state.image_bytes:
     # Display Uploaded or Selected Image
     displayed_image = st.image(
         image=st.session_state.image_bytes
