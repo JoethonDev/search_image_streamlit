@@ -46,7 +46,7 @@ def get_records(query):
 
 def find_similar(image_bytes):
     # Process Image to Vectors
-    st.session_state.image_bytes = image_bytes
+    st.session_state.image_bytes = get_bytes_from_base64(image_bytes)
 
 
 def get_bytes_from_base64(base64_string):
