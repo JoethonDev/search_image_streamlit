@@ -57,7 +57,7 @@ def get_bytes_from_base64(base64_string):
 uploaded_image = st.file_uploader("Upload Image", type=["png", "jpg", "jpeg"]) 
 
 # Results' Header
-if uploaded_image:
+if uploaded_image and st.session_state.image_bytes == None:
     st.session_state.image_bytes = uploaded_image.getvalue()
     uploaded_image.close()
 
